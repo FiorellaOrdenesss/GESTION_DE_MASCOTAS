@@ -20,9 +20,20 @@ const sequelize = new Sequelize("gestion_de_mascotas", "root", "Tuviejaentanga12
 class Cliente extends Model { }
 Cliente.init(
     {
-        nombre: DataTypes.STRING,
-        apellido: DataTypes.STRING,
-        edad: DataTypes.INTEGER,
+        nombre: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: { notEmpty: true }
+        },
+        apellido: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: { notEmpty: true }
+        },
+        edad: {
+            type: DataTypes.INTEGER,
+            validate: { min: 0 }
+        }
     },
     { sequelize, modelName: "cliente" }
 );
@@ -38,16 +49,26 @@ Cliente.init(
 class Mascota extends Model { }
 Mascota.init(
     {
-        nombre: DataTypes.STRING,
-        tipo: DataTypes.STRING,
-        edad: DataTypes.INTEGER,
-        peso: DataTypes.FLOAT,
-        fechaNacimiento: DataTypes.DATEONLY,
-        vacunado: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        nombre: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: { notEmpty: true }
         },
-        descripcion: DataTypes.TEXT,
+        tipo: {
+            type: DataTypes.STRING,
+            validate: { isIn: [["perro", "gato", "ave", "otro"]] }
+        },
+        edad: {
+            type: DataTypes.INTEGER,
+            validate: { min: 0 }
+        },
+        peso: {
+            type: DataTypes.FLOAT,
+            validate: { min: 0.1 }
+        },
+        fechaNacimiento: DataTypes.DATEONLY,
+        vacunado: { type: DataTypes.BOOLEAN, defaultValue: false },
+        descripcion: DataTypes.TEXT
     },
     { sequelize, modelName: "mascota" }
 );
