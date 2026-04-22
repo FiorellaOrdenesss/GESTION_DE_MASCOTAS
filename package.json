@@ -11,7 +11,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+<<<<<<< HEAD
     "cors": "^2.8.6",
+=======
+>>>>>>> 5541a36884d1b982a60410311617c0c43e4e1c14
     "express": "^5.2.1",
     "mysql2": "^3.22.0",
     "sequelize": "^6.37.8"
